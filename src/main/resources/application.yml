@@ -20,12 +20,12 @@ pagehelper:
   params: count=countSql
 
 wx:
-  appid: wx44e91599e99be24a
-  appsecret: eff5d9f3261d0b0b8337a77d2feae95c
+  #appid: wx44e91599e99be24a
+  #appsecret: eff5d9f3261d0b0b8337a77d2feae95c
 
-  #appid: wx711bfa08f2b1ec2a
-  #appsecret: cd68d8c7d2dd00f1554efbda769f62f2
+  appid: wx711bfa08f2b1ec2a
+  appsecret: cd68d8c7d2dd00f1554efbda769f62f2
   token: zhifa
-  callback-url: http://zhifa.free.idcfengye.com
+  callback-url: http://www.zhifa.tech
   #callback-domain: http://fzft8c.natappfree.cc
   encoding-aes-key: by5Bam8DnWXWdEt1exy99jqatYouhAfHlTKo719ZBgE
