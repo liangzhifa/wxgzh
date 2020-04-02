@@ -25,7 +25,7 @@ public class WxSubscribeEventController {
     /*
      *
      * wxUser==>com.mxixm.fastboot.weixin.module.user.WxUser(
-     * subscribe=1,
+     * SUBSCRIBE=1,
      * openId=ovwMI59y1dfGKq2kJ9yDn96-kUPM,
      *  nickName=小智,
      * sex=1,

@@ -4,17 +4,25 @@ server:
     context-path: /
 spring:
   datasource:
-    url: jdbc:mysql://47.100.45.101:3306/wxgzh?serverTimezone=Asia/Shanghai&useAffectedRows=true&useSSL=true&characterEncoding=utf8
+    url: jdbc:oracle:thin:@47.100.45.101:1521/xe
     password: zhifa123
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    username: wxgzh
+    hikari:
+      max-lifetime: 1200000
+    dbcp2:
+      validation-query: select 1 from dual
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   typeAliasesPackage: com.zhifa.wxgzh.domain
   configuration:
     map-underscore-to-camel-case: true
+#mybatis的sql日志打印
+logging:
+  level:
+    com.zhifa.wxgzh.mapper: debug
 pagehelper:
-  helperDialect: mysql
+  helperDialect: oracle
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
