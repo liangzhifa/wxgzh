@@ -1,26 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zhifa.wxgzh.mapper.WxUserInfoMapper">
-  <resultMap id="BaseResultMap" type="com.zhifa.wxgzh.domain.WxUserInfo">
-    <!--@mbg.generated-->
-    <!--@Table WX_USER_INFO-->
-    <id column="ID" jdbcType="DECIMAL" property="id" />
-    <result column="SUBSCRIBE" jdbcType="VARCHAR" property="subscribe" />
-    <result column="OPEN_ID" jdbcType="VARCHAR" property="openId" />
-    <result column="NICK_NAME" jdbcType="VARCHAR" property="nickName" />
-    <result column="SEX" jdbcType="VARCHAR" property="sex" />
-    <result column="CITY" jdbcType="VARCHAR" property="city" />
-    <result column="COUNTRY" jdbcType="VARCHAR" property="country" />
-    <result column="PROVINCE" jdbcType="VARCHAR" property="province" />
-    <result column="LANGUAGE" jdbcType="VARCHAR" property="language" />
-    <result column="HEAD_IMG_URL" jdbcType="VARCHAR" property="headImgUrl" />
-    <result column="SUBSCRIBE_TIME" jdbcType="TIMESTAMP" property="subscribeTime" />
-    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    ID, SUBSCRIBE, OPEN_ID, NICK_NAME, SEX, CITY, COUNTRY, PROVINCE, "LANGUAGE", HEAD_IMG_URL, 
-    SUBSCRIBE_TIME, CREATE_TIME, REMARK
-  </sql>
+
 </mapper>
