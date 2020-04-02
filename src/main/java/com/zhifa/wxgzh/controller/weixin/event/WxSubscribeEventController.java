@@ -5,11 +5,24 @@ import com.mxixm.fastboot.weixin.annotation.WxEventMapping;
 import com.mxixm.fastboot.weixin.module.event.WxEvent;
 import com.mxixm.fastboot.weixin.module.user.WxUser;
 import com.mxixm.fastboot.weixin.module.web.WxRequest;
+import com.zhifa.wxgzh.domain.WxUserInfo;
+import com.zhifa.wxgzh.service.WxUserInfoService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+
+import java.util.Date;
 
 @WxController
 @Slf4j
 public class WxSubscribeEventController {
+
+
+    @Autowired
+    private WxUserInfoService wxUserInfoService;
+
+
     /**
      * 退订
      * 接受微信事件
@@ -49,8 +62,19 @@ public class WxSubscribeEventController {
     @WxEventMapping(type = WxEvent.Type.SUBSCRIBE)
     public String subscribe(WxRequest wxRequest, WxUser wxUser) {
         System.out.println(wxUser.getNickName() + "订了公众号");
+        saveWxUserInfo(wxUser);
         log.info("wxRequest==>{},\nwxUser==>{}", wxRequest, wxUser);
         return "非常感谢 " + wxUser.getNickName() + "/:rose  关注小智的个人公众号^_^   /:rose";
+    }
+
+    @Async
+    public void saveWxUserInfo(WxUser wxUser) {
+        WxUserInfo wxUserInfo = new WxUserInfo();
+        BeanUtils.copyProperties(wxUser, wxUserInfo);
+        wxUserInfo.setSex(wxUser.getSex()+"");
+        wxUserInfo.setSubscribe(wxUser.getSubscribe()+"");
+        wxUserInfo.setCreateTime(new Date());
+        wxUserInfoService.save(wxUserInfo);
     }
 
 }
