@@ -13,6 +13,7 @@ import com.zhifa.wxgzh.service.WxUserEventService;
 import com.zhifa.wxgzh.service.WxUserInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -48,16 +49,7 @@ public class WxMenuLeftController {
             name= "个人简历")
     @WxAsyncMessage
     public void leftmySelf(WxRequest wxRequest, WxUser wxUser) {
-        Date date = new Date();
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd kk:mm:ss ");
-        System.out.println(sdf.format(date));
-        wxUserEventService.save(
-                WxUserEvent.builder()
-                        .event(CommonConstant.CLICK_CSDN_VIEW)
-                        .openId(wxUser.getOpenId())
-                        .createTime(date)
-                        .build());
-        log.info("个人简历：{}",wxUser);
+        saveUserInfo(wxUser,CommonConstant.CLICK_CSDN_VIEW);
        /* return WxMessage.newsBuilder()
                 .addItem("测试图文消息",
                         "测试",
@@ -65,6 +57,9 @@ public class WxMenuLeftController {
                         "http://zhifa.free.idcfengye.com/")
                 .build();*/
     }
+
+
+
     /**
      * 定义微信菜单，并接受事件
      */
@@ -74,12 +69,13 @@ public class WxMenuLeftController {
             url = "https://mp.csdn.net/console/article",
             name= "CSDN博客")
     public void leftCSDN(WxRequest wxRequest, WxUser wxUser) {
-        wxUserEventService.save(
+       /* wxUserEventService.save(
                 WxUserEvent.builder()
                         .event(CommonConstant.CLICK_CSDN_VIEW)
                         .openId(wxUser.getOpenId())
                         .createTime(new Date())
-                        .build());
+                        .build());*/
+        saveUserInfo(wxUser, CommonConstant.CLICK_CSDN_VIEW);
         log.info("CSDN博客：{}",wxUser);
     }
     /**
@@ -91,12 +87,13 @@ public class WxMenuLeftController {
             url = "https://github.com/liangzhifa",
             name= "GitHub仓库")
     public void leftGitHub(WxRequest wxRequest, WxUser wxUser) {
-        wxUserEventService.save(
+       /* wxUserEventService.save(
                 WxUserEvent.builder()
                         .event(CommonConstant.CLICK_GitHub_VIEW)
                         .openId(wxUser.getOpenId())
                         .createTime(new Date())
-                        .build());
+                        .build());*/
+        saveUserInfo(wxUser, CommonConstant.CLICK_GitHub_VIEW);
         log.info("GitHub：{}",wxUser);
     }
  /**
@@ -108,13 +105,29 @@ public class WxMenuLeftController {
             url = "https://gitee.com/xiaozhiZhiShui",
             name= "码云仓库")
     public void leftgitee(WxRequest wxRequest, WxUser wxUser) {
-        wxUserEventService.save(
+       /* wxUserEventService.save(
                 WxUserEvent.builder()
                         .event(CommonConstant.CLICK_GitHub_VIEW)
                         .openId(wxUser.getOpenId())
                         .createTime(new Date())
-                        .build());
+                        .build());*/
+        saveUserInfo(wxUser, CommonConstant.CLICK_GitEE_VIEW);
         log.info("gitee：{}",wxUser);
+    }
+
+
+    @Async
+    public void saveUserInfo(WxUser wxUser,String event) {
+        Date date = new Date();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd kk:mm:ss ");
+        System.out.println(sdf.format(date));
+        wxUserEventService.save(
+                WxUserEvent.builder()
+                        .event(event)
+                        .openId(wxUser.getOpenId())
+                        .createTime(date)
+                        .build());
+        log.info("个人简历：{}",wxUser);
     }
 
 }
