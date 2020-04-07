@@ -47,11 +47,12 @@ public class WxMenuLeftController {
             name= "个人简历")
     @WxAsyncMessage
     public void leftmySelf(WxRequest wxRequest, WxUser wxUser) {
+        Date date = new Date();
         wxUserEventService.save(
                 WxUserEvent.builder()
                         .event(CommonConstant.CLICK_CSDN_VIEW)
                         .openId(wxUser.getOpenId())
-                        .createTime(new Date())
+                        .createTime(date)
                         .build());
         log.info("个人简历：{}",wxUser);
        /* return WxMessage.newsBuilder()
