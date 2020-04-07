@@ -35,6 +35,7 @@ wx:
   #appsecret: cd68d8c7d2dd00f1554efbda769f62f2
   token: zhifa
   #callback-url: http://www.zhifa.tech
-  callback-url: http://zhifa.free.idcfengye.com
-  #callback-domain: http://fzft8c.natappfree.cc
-  encoding-aes-key: by5Bam8DnWXWdEt1exy99jqatYouhAfHlTKo719ZBgE
+  #callback-url: http://zhifa.free.idcfengye.com/
+
+  callback-domain: http://www.zhifa.tech
+  #encoding-aes-key: by5Bam8DnWXWdEt1exy99jqatYouhAfHlTKo719ZBgE

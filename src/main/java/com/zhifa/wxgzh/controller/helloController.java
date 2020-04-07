@@ -16,9 +16,9 @@ public class helloController {
     @Autowired
     private WxUserInfoService wxUserInfoService;
 
-    @RequestMapping("/")
+   /* @RequestMapping("/")
     public List<WxUserInfo> sayHello(){
         List<WxUserInfo> list = wxUserInfoService.list();
         return list;
-    }
+    }*/
 }

@@ -1,5 +1,6 @@
 package com.zhifa.wxgzh.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
@@ -10,6 +11,9 @@ import com.zhifa.wxgzh.service.WxUserInfoService;
 
 @Service
 public class WxUserInfoServiceImpl extends ServiceImpl<WxUserInfoMapper, WxUserInfo> implements WxUserInfoService {
+
+    @Autowired
+    private WxUserInfoMapper wxUserInfoMapper;
 
 }
 
