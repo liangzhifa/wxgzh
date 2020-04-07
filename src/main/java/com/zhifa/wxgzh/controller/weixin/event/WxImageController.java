@@ -21,14 +21,14 @@ public class WxImageController {
      */
     @WxMessageMapping(type = WxMessage.Type.IMAGE)
     @WxAsyncMessage
-    public WxUserMessage image(WxRequest wxRequest, WxRequestBody.Image image, String content) {
+    public String image(WxRequest wxRequest, WxRequestBody.Image image, String content) {
         WxRequest.Body body = wxRequest.getBody();
         String picUrl = image.getPicUrl();
         String openId = wxRequest.getOpenId();
         log.info("调用了image WxMessage.Type.IMAGE => openId={}  getPicUrl={}", openId, picUrl);
         WxMessage.ImageBuilder imageBuilder = WxMessage.imageBuilder();
         WxUserMessage build = imageBuilder.mediaUrl(picUrl).build();
-        return build;
+        return picUrl;
     }
 
 
