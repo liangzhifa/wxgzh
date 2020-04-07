@@ -14,6 +14,7 @@ import com.zhifa.wxgzh.service.WxUserInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -48,6 +49,8 @@ public class WxMenuLeftController {
     @WxAsyncMessage
     public void leftmySelf(WxRequest wxRequest, WxUser wxUser) {
         Date date = new Date();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd kk:mm:ss ");
+        System.out.println(sdf.format(date));
         wxUserEventService.save(
                 WxUserEvent.builder()
                         .event(CommonConstant.CLICK_CSDN_VIEW)
