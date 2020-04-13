@@ -13,7 +13,7 @@ public class WxMenuCenterController {
     /**
      * 定义微信菜单
      */
-    @WxButton(group = WxButton.Group.MIDDLE, main = true, name = "学习工具")
+    @WxButton(group = WxButton.Group.MIDDLE, main = true, name = "常用工具")
     public void center() {
     }
 
@@ -39,6 +39,15 @@ public class WxMenuCenterController {
             name = "百度翻译")
     @WxAsyncMessage
     public void youdaofanyi(WxRequest wxRequest) {
+    }
+
+    @WxButton(type = WxButton.Type.VIEW,
+            group = WxButton.Group.MIDDLE,
+            order = WxButton.Order.SECOND,
+            url = "https://www.iamwawa.cn/",
+            name = "便捷在线工具")
+    @WxAsyncMessage
+    public void wawagongju(WxRequest wxRequest) {
     }
 
 
