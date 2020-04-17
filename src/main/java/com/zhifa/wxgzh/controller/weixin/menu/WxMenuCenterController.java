@@ -32,18 +32,18 @@ public class WxMenuCenterController {
     }
 
 
-    @WxButton(type = WxButton.Type.VIEW,
+/*    @WxButton(type = WxButton.Type.VIEW,
             group = WxButton.Group.MIDDLE,
             order = WxButton.Order.SECOND,
             url = "https://fanyi.baidu.com/?aldtype=16047#auto/zh",
             name = "百度翻译")
     @WxAsyncMessage
     public void youdaofanyi(WxRequest wxRequest) {
-    }
+    }*/
 
     @WxButton(type = WxButton.Type.VIEW,
             group = WxButton.Group.MIDDLE,
-            order = WxButton.Order.THIRD,
+            order = WxButton.Order.SECOND,
             url = "https://www.iamwawa.cn/",
             name = "便捷在线工具")
     @WxAsyncMessage
@@ -58,7 +58,6 @@ public class WxMenuCenterController {
     @WxAsyncMessage
     public void dxzy163(WxRequest wxRequest) {
     }
-
     @WxButton(type = WxButton.Type.VIEW,
             group = WxButton.Group.MIDDLE,
             order = WxButton.Order.FORTH,
@@ -70,7 +69,7 @@ public class WxMenuCenterController {
 
     @WxButton(type = WxButton.Type.VIEW,
             group = WxButton.Group.MIDDLE,
-            order = WxButton.Order.FORTH,
+            order = WxButton.Order.FIFTH,
             url = "https://cn.office-converter.com/",
             name = "格式转换大全")
     @WxAsyncMessage
