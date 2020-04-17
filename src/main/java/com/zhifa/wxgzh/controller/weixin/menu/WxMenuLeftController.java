@@ -66,7 +66,7 @@ public class WxMenuLeftController {
     @WxButton(type = WxButton.Type.VIEW,
             group = WxButton.Group.LEFT,
             order = WxButton.Order.SECOND,
-            url = "https://mp.csdn.net/console/article",
+            url = "https://blog.csdn.net/zhifaLiang",
             name= "CSDN博客")
     public void leftCSDN(WxRequest wxRequest, WxUser wxUser) {
        /* wxUserEventService.save(
