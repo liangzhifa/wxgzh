@@ -43,11 +43,38 @@ public class WxMenuCenterController {
 
     @WxButton(type = WxButton.Type.VIEW,
             group = WxButton.Group.MIDDLE,
-            order = WxButton.Order.SECOND,
+            order = WxButton.Order.THIRD,
             url = "https://www.iamwawa.cn/",
             name = "便捷在线工具")
     @WxAsyncMessage
     public void wawagongju(WxRequest wxRequest) {
+    }
+
+    @WxButton(type = WxButton.Type.VIEW,
+            group = WxButton.Group.MIDDLE,
+            order = WxButton.Order.THIRD,
+            url = "http://www.dxzy163.com/",
+            name = "大学资源网")
+    @WxAsyncMessage
+    public void dxzy163(WxRequest wxRequest) {
+    }
+
+    @WxButton(type = WxButton.Type.VIEW,
+            group = WxButton.Group.MIDDLE,
+            order = WxButton.Order.FORTH,
+            url = "http://www.bewindoweb.com/dwg.php",
+            name = "各大网站书签")
+    @WxAsyncMessage
+    public void bewindoweb(WxRequest wxRequest) {
+    }
+
+    @WxButton(type = WxButton.Type.VIEW,
+            group = WxButton.Group.MIDDLE,
+            order = WxButton.Order.FORTH,
+            url = "https://cn.office-converter.com/",
+            name = "格式转换大全")
+    @WxAsyncMessage
+    public void office(WxRequest wxRequest) {
     }
 
 

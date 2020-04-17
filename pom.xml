@@ -130,7 +130,7 @@
     </build>
     <repositories><!-- 代码库 -->
 
-     <!--   <repository>
+        <repository>
             <id>maven-ali</id>
             <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
             <releases>
@@ -141,7 +141,7 @@
                 <updatePolicy>always</updatePolicy>
                 <checksumPolicy>fail</checksumPolicy>
             </snapshots>
-        </repository>-->
+        </repository>
 
 
     </repositories>
