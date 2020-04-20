@@ -3,13 +3,19 @@ package com.zhifa.wxgzh.controller.weixin.menu;
 import com.mxixm.fastboot.weixin.annotation.WxAsyncMessage;
 import com.mxixm.fastboot.weixin.annotation.WxButton;
 import com.mxixm.fastboot.weixin.annotation.WxController;
+import com.mxixm.fastboot.weixin.module.user.WxUser;
 import com.mxixm.fastboot.weixin.module.web.WxRequest;
+import com.zhifa.wxgzh.common.CommonConstant;
+import com.zhifa.wxgzh.service.impl.CommonService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 @WxController
 public class WxMenuCenterController {
 
 
+    @Autowired
+    private CommonService commonService;
     /**
      * 定义微信菜单
      */
@@ -26,8 +32,9 @@ public class WxMenuCenterController {
             order = WxButton.Order.FIRST,
             name = "照片提取文字")
     @WxAsyncMessage
-    public void PIC_PHOTO_OR_ALBUM(WxRequest wxRequest) {
+    public void PIC_PHOTO_OR_ALBUM(WxRequest wxRequest, WxUser wxUser) {
         //  WxRequest.Body body = wxRequest.getBody();
+        commonService.saveUserInfo(wxUser, CommonConstant.CLICK_Photo_VIEW);
 
     }
 
@@ -47,7 +54,8 @@ public class WxMenuCenterController {
             url = "https://www.iamwawa.cn/",
             name = "便捷在线工具")
     @WxAsyncMessage
-    public void wawagongju(WxRequest wxRequest) {
+    public void wawagongju(WxRequest wxRequest,WxUser wxUser) {
+        commonService.saveUserInfo(wxUser, CommonConstant.CLICK_Tools_VIEW);
     }
 
     @WxButton(type = WxButton.Type.VIEW,
@@ -56,7 +64,8 @@ public class WxMenuCenterController {
             url = "http://www.dxzy163.com/",
             name = "大学资源网")
     @WxAsyncMessage
-    public void dxzy163(WxRequest wxRequest) {
+    public void dxzy163(WxRequest wxRequest,WxUser wxUser) {
+        commonService.saveUserInfo(wxUser, CommonConstant.CLICK_College_VIEW);
     }
     @WxButton(type = WxButton.Type.VIEW,
             group = WxButton.Group.MIDDLE,
@@ -64,7 +73,8 @@ public class WxMenuCenterController {
             url = "http://www.bewindoweb.com/dwg.php",
             name = "各大网站书签")
     @WxAsyncMessage
-    public void bewindoweb(WxRequest wxRequest) {
+    public void bewindoweb(WxRequest wxRequest,WxUser wxUser) {
+        commonService.saveUserInfo(wxUser, CommonConstant.CLICK_Bookmark_VIEW);
     }
 
     @WxButton(type = WxButton.Type.VIEW,
@@ -73,7 +83,8 @@ public class WxMenuCenterController {
             url = "https://cn.office-converter.com/",
             name = "格式转换大全")
     @WxAsyncMessage
-    public void office(WxRequest wxRequest) {
+    public void office(WxRequest wxRequest,WxUser wxUser) {
+        commonService.saveUserInfo(wxUser, CommonConstant.CLICK_Format_Change_VIEW);
     }
 
 

@@ -3,20 +3,12 @@ package com.zhifa.wxgzh.controller.weixin.menu;
 import com.mxixm.fastboot.weixin.annotation.WxAsyncMessage;
 import com.mxixm.fastboot.weixin.annotation.WxButton;
 import com.mxixm.fastboot.weixin.annotation.WxController;
-import com.mxixm.fastboot.weixin.module.message.WxMessage;
-import com.mxixm.fastboot.weixin.module.message.WxUserMessage;
 import com.mxixm.fastboot.weixin.module.user.WxUser;
 import com.mxixm.fastboot.weixin.module.web.WxRequest;
 import com.zhifa.wxgzh.common.CommonConstant;
-import com.zhifa.wxgzh.domain.WxUserEvent;
-import com.zhifa.wxgzh.service.WxUserEventService;
-import com.zhifa.wxgzh.service.WxUserInfoService;
+import com.zhifa.wxgzh.service.impl.CommonService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
 @WxController
@@ -25,11 +17,7 @@ public class WxMenuLeftController {
 
 
     @Autowired
-    private WxUserInfoService wxUserInfoService;
-
-    @Autowired
-    private WxUserEventService wxUserEventService;
-
+    private CommonService commonService;
 
     /**
      * 定义微信菜单
@@ -40,16 +28,17 @@ public class WxMenuLeftController {
 
     /**
      * 定义微信菜单，并接受事件
+     *
      * @return
      */
     @WxButton(type = WxButton.Type.VIEW,
             group = WxButton.Group.LEFT,
             order = WxButton.Order.FIRST,
             url = "http://www.zhifa.tech",
-            name= "个人简历")
+            name = "个人简历")
     @WxAsyncMessage
     public void leftmySelf(WxRequest wxRequest, WxUser wxUser) {
-        saveUserInfo(wxUser,CommonConstant.CLICK_CSDN_VIEW);
+        commonService.saveUserInfo(wxUser, CommonConstant.CLICK_CSDN_VIEW);
        /* return WxMessage.newsBuilder()
                 .addItem("测试图文消息",
                         "测试",
@@ -59,7 +48,6 @@ public class WxMenuLeftController {
     }
 
 
-
     /**
      * 定义微信菜单，并接受事件
      */
@@ -67,7 +55,7 @@ public class WxMenuLeftController {
             group = WxButton.Group.LEFT,
             order = WxButton.Order.SECOND,
             url = "https://blog.csdn.net/zhifaLiang",
-            name= "CSDN博客")
+            name = "CSDN博客")
     public void leftCSDN(WxRequest wxRequest, WxUser wxUser) {
        /* wxUserEventService.save(
                 WxUserEvent.builder()
@@ -75,9 +63,10 @@ public class WxMenuLeftController {
                         .openId(wxUser.getOpenId())
                         .createTime(new Date())
                         .build());*/
-        saveUserInfo(wxUser, CommonConstant.CLICK_CSDN_VIEW);
-        log.info("CSDN博客：{}",wxUser);
+        commonService.saveUserInfo(wxUser, CommonConstant.CLICK_CSDN_VIEW);
+        log.info("CSDN博客：{}", wxUser);
     }
+
     /**
      * 定义微信菜单，并接受事件
      */
@@ -85,7 +74,7 @@ public class WxMenuLeftController {
             group = WxButton.Group.LEFT,
             order = WxButton.Order.THIRD,
             url = "https://github.com/liangzhifa",
-            name= "GitHub仓库")
+            name = "GitHub仓库")
     public void leftGitHub(WxRequest wxRequest, WxUser wxUser) {
        /* wxUserEventService.save(
                 WxUserEvent.builder()
@@ -93,17 +82,18 @@ public class WxMenuLeftController {
                         .openId(wxUser.getOpenId())
                         .createTime(new Date())
                         .build());*/
-        saveUserInfo(wxUser, CommonConstant.CLICK_GitHub_VIEW);
-        log.info("GitHub：{}",wxUser);
+        commonService.saveUserInfo(wxUser, CommonConstant.CLICK_GitHub_VIEW);
+        log.info("GitHub：{}", wxUser);
     }
- /**
+
+    /**
      * 定义微信菜单，并接受事件
      */
     @WxButton(type = WxButton.Type.VIEW,
             group = WxButton.Group.LEFT,
             order = WxButton.Order.FORTH,
             url = "https://gitee.com/xiaozhiZhiShui",
-            name= "码云仓库")
+            name = "码云仓库")
     public void leftgitee(WxRequest wxRequest, WxUser wxUser) {
        /* wxUserEventService.save(
                 WxUserEvent.builder()
@@ -111,23 +101,8 @@ public class WxMenuLeftController {
                         .openId(wxUser.getOpenId())
                         .createTime(new Date())
                         .build());*/
-        saveUserInfo(wxUser, CommonConstant.CLICK_GitEE_VIEW);
-        log.info("gitee：{}",wxUser);
-    }
-
-
-    @Async
-    public void saveUserInfo(WxUser wxUser,String event) {
-        Date date = new Date();
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd kk:mm:ss ");
-        System.out.println(sdf.format(date));
-        wxUserEventService.save(
-                WxUserEvent.builder()
-                        .event(event)
-                        .openId(wxUser.getOpenId())
-                        .createTime(date)
-                        .build());
-        log.info("个人简历：{}",wxUser);
+        commonService.saveUserInfo(wxUser, CommonConstant.CLICK_GitEE_VIEW);
+        log.info("gitee：{}", wxUser);
     }
 
 }
