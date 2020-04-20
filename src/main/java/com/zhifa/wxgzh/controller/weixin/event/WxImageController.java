@@ -10,6 +10,8 @@ import com.mxixm.fastboot.weixin.module.web.WxRequest;
 import com.mxixm.fastboot.weixin.module.web.WxRequestBody;
 import com.zhifa.wxgzh.aliyun.AliyunClientCoonfig;
 import com.zhifa.wxgzh.aliyun.AliyunImageResult;
+import com.zhifa.wxgzh.domain.UserUploadImages;
+import com.zhifa.wxgzh.service.UserUploadImagesService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
@@ -22,6 +24,9 @@ public class WxImageController {
 
     @Autowired
     private AipOcr aipOcr;
+
+    @Autowired
+    private UserUploadImagesService userUploadImagesService;
 
     /**
      * 接受用户图片消息，异步返回文本消息
@@ -51,7 +56,9 @@ public class WxImageController {
                 imgResult.set(imgResult+"\n" + wordsResultBean.getWords());
             });
         }
-
+        /*保存用户上传的图片地址*/
+        UserUploadImages uploadImages = UserUploadImages.builder().openId(openId).picUrl(picUrl).build();
+        userUploadImagesService.saveUserUploadImages(uploadImages);
         return imgResult.get();
     }
 
