@@ -24,7 +24,7 @@ public class WxMenuCenterController {
     @WxButton(type = WxButton.Type.PIC_PHOTO_OR_ALBUM,
             group = WxButton.Group.MIDDLE,
             order = WxButton.Order.FIRST,
-            name = "照片转url")
+            name = "照片提取文字")
     @WxAsyncMessage
     public void PIC_PHOTO_OR_ALBUM(WxRequest wxRequest) {
         //  WxRequest.Body body = wxRequest.getBody();
