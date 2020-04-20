@@ -29,7 +29,7 @@ public class CommonService {
                         .openId(wxUser.getOpenId())
                         .createTime(date)
                         .build());
-        log.info("个人简历：{}",wxUser);
+        log.info("微信事件访问：{}",wxUser);
     }
 
 }
