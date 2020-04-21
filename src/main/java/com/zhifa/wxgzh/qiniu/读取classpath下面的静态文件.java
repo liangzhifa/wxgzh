@@ -118,7 +118,7 @@ public class 读取classpath下面的静态文件 {
             try {
                 System.err.println(r.bodyString());
             } catch (QiniuException ex2) {
-                //ignore
+                //ignore。。。
             }
         }
     }
