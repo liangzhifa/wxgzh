@@ -1,6 +1,7 @@
 # wxgzh
 个人开发的微信公众号项目
 cd /usr/local/software/wxgzh/
+git pull
 mvn clean
 mvn install package -Dmaven.test.skip=true
 docker stop wxgzh

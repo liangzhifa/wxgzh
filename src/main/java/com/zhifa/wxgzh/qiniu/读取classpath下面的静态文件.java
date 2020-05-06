@@ -31,7 +31,7 @@ public class 读取classpath下面的静态文件 {
         File[] files = fileDir.listFiles();
         for (File file : files) {
             if (file.isDirectory()) {
-                String pathPrefix = file.getName() + File.separator;
+                String pathPrefix = file.getName() + "/";
                 File[] listFiles = file.listFiles();
                 for (File listFile : listFiles) {
                     fileAbsolutePath.add(listFile.getAbsolutePath());
@@ -79,7 +79,7 @@ public class 读取classpath下面的静态文件 {
                 String key = keyList[i];
                 System.out.print(key + "\t");
                 if (status.code == 200) {
-                    System.out.println("delete success");
+                    System.out.println("删除成功");
                 } else {
                     System.out.println(status.data.error);
                 }
