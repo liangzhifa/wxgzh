@@ -3,6 +3,7 @@ package com.zhifa.wxgzh.controller.business;
 
 import java.net.URLEncoder;
 
+import com.zhifa.wxgzh.aliyun.AuthService;
 import com.zhifa.wxgzh.util.Base64Util;
 import com.zhifa.wxgzh.util.FileUtil;
 import com.zhifa.wxgzh.util.HttpUtil;
@@ -26,7 +27,7 @@ public class PeopleImageController {
         String url = "https://aip.baidubce.com/rest/2.0/image-process/v1/selfie_anime";
         try {
             // 本地文件路径
-            String filePath = "[本地文件路径]";
+            String filePath = "E:\\报名照片\\myimgs\\zhifa.jpg";
             byte[] imgData = FileUtil.readFileByBytes(filePath);
             String imgStr = Base64Util.encode(imgData);
             String imgParam = URLEncoder.encode(imgStr, "UTF-8");
@@ -34,7 +35,7 @@ public class PeopleImageController {
             String param = "image=" + imgParam;
 
             // 注意这里仅为了简化编码每一次请求都去获取access_token，线上环境access_token有过期时间， 客户端可自行缓存，过期后重新获取。
-            String accessToken = "[调用鉴权接口获取的token]";
+            String accessToken = AuthService.getAuth();
 
             String result = HttpUtil.post(url, accessToken, param);
             System.out.println(result);
