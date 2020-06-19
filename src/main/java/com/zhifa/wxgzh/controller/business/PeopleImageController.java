@@ -9,6 +9,7 @@ import com.zhifa.wxgzh.util.Base64Util;
 import com.zhifa.wxgzh.util.FileUtil;
 import com.zhifa.wxgzh.util.HttpUtil;
 import com.zhifa.wxgzh.util.LocalFileUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,7 @@ import java.net.URLEncoder;
 import java.util.Date;
 
 @RestController
+@Slf4j
 public class PeopleImageController {
     /**
      * 重要提示代码中所需工具类
@@ -65,6 +67,7 @@ public class PeopleImageController {
 
     @PostMapping("/uploadImg")
     public Object uploadImg(@RequestParam("file") MultipartFile file) {
+        log.error("请求进来啦、、");
         String fileName = file.getOriginalFilename();//获取文件名
         String userHome = LocalFileUtil.getUserHome();
         String loaclFilePath = userHome + fileName;
