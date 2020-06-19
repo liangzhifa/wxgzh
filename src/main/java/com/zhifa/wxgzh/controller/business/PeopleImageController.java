@@ -71,6 +71,7 @@ public class PeopleImageController {
         String fileName = file.getOriginalFilename();//获取文件名
         String userHome = LocalFileUtil.getUserHome();
         String loaclFilePath = userHome + fileName;
+        log.error("本地地址：{}",loaclFilePath);
         BufferedOutputStream out = null;
         if (!file.isEmpty()) {
             try {
@@ -93,6 +94,7 @@ public class PeopleImageController {
         String base64FileName = timeStamp + fileName;
         ByteUpload.GenerateImage(imgResult.getImage(), base64FileName);
         String qiniuLoaclPah = userHome + base64FileName;
+        log.error("本地地址：{}",qiniuLoaclPah);
         ByteUpload.uploadToQiniu(qiniuLoaclPah,base64FileName);
         String targetPath = "http://images.zhifa.tech/" + base64FileName;
         return targetPath;

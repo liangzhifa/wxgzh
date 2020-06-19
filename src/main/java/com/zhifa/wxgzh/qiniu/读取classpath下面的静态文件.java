@@ -97,7 +97,8 @@ public class 读取classpath下面的静态文件 {
         //...生成上传凭证，然后准备上传
         String accessKey = "pzzac04NDj0tO4hKtuMp0fZh0_sZzq-Y3G48QWQd";
         String secretKey = "9O6pqS4nWTqNYUd3f6_2weAv41ev93HEjx2iyLx-";
-        String bucket = "wxgzh-web";
+        //String bucket = "wxgzh-web";
+        String bucket = "liangzf-img";
 
         Auth auth = Auth.create(accessKey, secretKey);
         String upToken = auth.uploadToken(bucket);
