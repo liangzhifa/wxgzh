@@ -72,6 +72,7 @@ public class PeopleImageController {
         String userHome = LocalFileUtil.getUserHome();
         String loaclFilePath = userHome + fileName;
         log.error("本地地址：{}",loaclFilePath);
+        long startTime = new Date().getTime();
         BufferedOutputStream out = null;
         if (!file.isEmpty()) {
             try {
@@ -93,9 +94,12 @@ public class PeopleImageController {
         String timeStamp = "动漫头像"+new Date().getTime() + "_";
         String base64FileName = timeStamp + fileName;
         ByteUpload.GenerateImage(imgResult.getImage(), base64FileName);
+        long endTime = new Date().getTime();
+        log.error("保存本地到百度接口所需时间：{}",(endTime-startTime));
         String qiniuLoaclPah = userHome + base64FileName;
         log.error("本地地址：{}",qiniuLoaclPah);
         ByteUpload.uploadToQiniu(qiniuLoaclPah,base64FileName);
+        log.error("调用七牛云接口所需时间：{}",(new Date().getTime()-endTime));
         String targetPath = "http://images.zhifa.tech/" + base64FileName;
         return targetPath;
 
