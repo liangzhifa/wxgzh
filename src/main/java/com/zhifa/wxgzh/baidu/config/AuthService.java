@@ -1,4 +1,4 @@
-package com.zhifa.wxgzh.aliyun;
+package com.zhifa.wxgzh.baidu.config;
 
 import org.json.JSONObject;
 

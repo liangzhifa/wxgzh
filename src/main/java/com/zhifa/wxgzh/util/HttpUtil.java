@@ -71,7 +71,7 @@ public class HttpUtil {
             result += getLine;
         }
         in.close();
-        System.err.println("result:" + result);
+        //System.err.println("result:" + result);
         return result;
     }
 }
