@@ -20,6 +20,9 @@ import static org.springframework.util.ResourceUtils.CLASSPATH_URL_PREFIX;
 
 public class 读取classpath下面的静态文件 {
 
+    //private static String bucket = "wxgzh-web";//简历
+    private static final String bucket = "liangzf-img";//img
+
     public static void main(String[] args) throws Exception {
         List<String> fileAbsolutePath = new ArrayList<>();
         List<String> fileName = new ArrayList<>();
@@ -46,21 +49,21 @@ public class 读取classpath下面的静态文件 {
             }
         }
         /*先批量删除*/
-        batchDel(fileName.toArray(new String[fileName.size()]));
+        batchDel(fileName.toArray(new String[fileName.size()]),bucket);
         /*然后就是上传文件*/
-        BatchUpload(fileAbsolutePath,fileName);
+        BatchUpload(fileAbsolutePath,fileName,bucket);
 
         System.out.println();
 
     }
 
-    public static void batchDel(String[] keyList) {
+    public static void batchDel(String[] keyList,String bucket) {
         //构造一个带指定 Region 对象的配置类
         Configuration cfg = new Configuration(Region.region0());
         //...其他参数参考类注释
         String accessKey = "pzzac04NDj0tO4hKtuMp0fZh0_sZzq-Y3G48QWQd";
         String secretKey = "9O6pqS4nWTqNYUd3f6_2weAv41ev93HEjx2iyLx-";
-        String bucket = "wxgzh-web";
+
         Auth auth = Auth.create(accessKey, secretKey);
         BucketManager bucketManager = new BucketManager(auth, cfg);
         try {
@@ -89,7 +92,7 @@ public class 读取classpath下面的静态文件 {
         }
     }
 
-    public static void BatchUpload(List<String> fileAbsolutePath,List<String> fileName) {
+    public static void BatchUpload(List<String> fileAbsolutePath,List<String> fileName,  String bucket ) {
         //构造一个带指定 Region 对象的配置类
         Configuration cfg = new Configuration(Region.huadong());
         //...其他参数参考类注释
@@ -98,7 +101,6 @@ public class 读取classpath下面的静态文件 {
         String accessKey = "pzzac04NDj0tO4hKtuMp0fZh0_sZzq-Y3G48QWQd";
         String secretKey = "9O6pqS4nWTqNYUd3f6_2weAv41ev93HEjx2iyLx-";
         //String bucket = "wxgzh-web";
-        String bucket = "liangzf-img";
 
         Auth auth = Auth.create(accessKey, secretKey);
         String upToken = auth.uploadToken(bucket);
