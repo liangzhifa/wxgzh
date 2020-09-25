@@ -20,8 +20,8 @@ import static org.springframework.util.ResourceUtils.CLASSPATH_URL_PREFIX;
 
 public class 读取classpath下面的静态文件 {
 
-    //private static String bucket = "wxgzh-web";//简历
-    private static final String bucket = "liangzf-img";//img
+    private static final String bucket = "wxgzh-web";//简历
+    //private static final String bucket = "liangzf-img";//img
 
     public static void main(String[] args) throws Exception {
         List<String> fileAbsolutePath = new ArrayList<>();

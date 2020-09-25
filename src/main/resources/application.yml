@@ -6,7 +6,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url:  jdbc:mysql://47.100.45.101:3306/wxgzh?serverTimezone=Asia/Shanghai&useAffectedRows=true&useSSL=true&characterEncoding=utf8
-    password:
+    password: zhifa123
     username: root
     hikari:
       max-lifetime: 1200000

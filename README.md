@@ -13,3 +13,7 @@ docker ps -a
 docker logs -f wxgzh
 
 
+docker run -d -it -p 8000:8000 -e MYSQL_USER=root -e MYSQL_ADDR=47.100.45.101:3306 -e MYSQL_PASSWORD=zhifa123 -e MYSQL_DB=wxgzh test/yearning
+
+
+

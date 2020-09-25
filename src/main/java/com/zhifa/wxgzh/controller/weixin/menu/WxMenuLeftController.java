@@ -38,7 +38,28 @@ public class WxMenuLeftController {
             name = "个人简历")
     @WxAsyncMessage
     public void leftmySelf(WxRequest wxRequest, WxUser wxUser) {
-        commonService.saveUserInfo(wxUser, CommonConstant.CLICK_CSDN_VIEW);
+        commonService.saveUserInfo(wxUser, CommonConstant.CLICK_MySelf_VIEW);
+       /* return WxMessage.newsBuilder()
+                .addItem("测试图文消息",
+                        "测试",
+                        "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/logo_white.png",
+                        "http://zhifa.free.idcfengye.com/")
+                .build();*/
+    }
+
+    /**
+     * 定义微信菜单，并接受事件
+     *
+     * @return
+     */
+    @WxButton(type = WxButton.Type.VIEW,
+            group = WxButton.Group.LEFT,
+            order = WxButton.Order.SECOND,
+            url = "http://wxgzh.zhifa.tech/#/img",
+            name = "头像动漫化")
+    @WxAsyncMessage
+    public void leftImg(WxRequest wxRequest, WxUser wxUser) {
+        commonService.saveUserInfo(wxUser, CommonConstant.CLICK_IMG_VIEW);
        /* return WxMessage.newsBuilder()
                 .addItem("测试图文消息",
                         "测试",
@@ -53,7 +74,7 @@ public class WxMenuLeftController {
      */
     @WxButton(type = WxButton.Type.VIEW,
             group = WxButton.Group.LEFT,
-            order = WxButton.Order.SECOND,
+            order = WxButton.Order.THIRD,
             url = "https://blog.csdn.net/zhifaLiang",
             name = "CSDN博客")
     public void leftCSDN(WxRequest wxRequest, WxUser wxUser) {
@@ -72,7 +93,7 @@ public class WxMenuLeftController {
      */
     @WxButton(type = WxButton.Type.VIEW,
             group = WxButton.Group.LEFT,
-            order = WxButton.Order.THIRD,
+            order = WxButton.Order.FORTH,
             url = "https://github.com/liangzhifa",
             name = "GitHub仓库")
     public void leftGitHub(WxRequest wxRequest, WxUser wxUser) {
@@ -91,7 +112,7 @@ public class WxMenuLeftController {
      */
     @WxButton(type = WxButton.Type.VIEW,
             group = WxButton.Group.LEFT,
-            order = WxButton.Order.FORTH,
+            order = WxButton.Order.FIFTH,
             url = "https://gitee.com/xiaozhiZhiShui",
             name = "码云仓库")
     public void leftgitee(WxRequest wxRequest, WxUser wxUser) {
