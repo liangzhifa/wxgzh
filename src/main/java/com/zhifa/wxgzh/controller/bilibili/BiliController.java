@@ -92,7 +92,7 @@ public class BiliController {
 
     @GetMapping("/getBilibiliTasks")
     public List<BLog> bilibiliTasks() throws Exception {
-        return bLogService.getList();
+        return bLogService.getList();/**/
 
     }
 }
