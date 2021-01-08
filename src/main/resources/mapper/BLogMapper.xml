@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhifa.wxgzh.mapper.BLogMapper">
+  <resultMap id="BaseResultMap" type="com.zhifa.wxgzh.domain.BLog">
+    <!--@mbg.generated-->
+    <!--@Table B_LOG-->
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="RESULT" jdbcType="LONGVARCHAR" property="result" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ID, `RESULT`, CREATE_TIME
+  </sql>
+</mapper>
