@@ -19,7 +19,7 @@ public class BiliScheduled {
     @Autowired
     private BLogService bLogService;
     //每日18点01分触发
-    @Scheduled(cron="0 1 18 * * ? *")
+    @Scheduled(cron="0 1 18 * * ?")
     public void bilibiliTasks() throws Exception {
         List<String> strings = new ArrayList<>();
 
