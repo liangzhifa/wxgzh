@@ -49,9 +49,8 @@ public class PeopleImageController {
             // 注意这里仅为了简化编码每一次请求都去获取access_token，线上环境access_token有过期时间， 客户端可自行缓存，过期后重新获取。
             String accessToken = AuthService.getAuth();
 
-            String result = HttpUtil.post(url, accessToken, param);
             //System.out.println(result);
-            return result;
+            return HttpUtil.post(url, accessToken, param);
         } catch (Exception e) {
             e.printStackTrace();
         }
