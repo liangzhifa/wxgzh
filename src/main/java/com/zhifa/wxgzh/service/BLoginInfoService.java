@@ -5,4 +5,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface BLoginInfoService extends IService<BLoginInfo>{
 
 
+    BLoginInfo findByUserId(String userId);
 }

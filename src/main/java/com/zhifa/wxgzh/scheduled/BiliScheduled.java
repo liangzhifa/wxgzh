@@ -2,8 +2,10 @@ package com.zhifa.wxgzh.scheduled;
 
 import cn.hutool.json.JSONUtil;
 import com.zhifa.wxgzh.domain.BLog;
+import com.zhifa.wxgzh.domain.BLoginInfo;
 import com.zhifa.wxgzh.dto.*;
 import com.zhifa.wxgzh.service.BLogService;
+import com.zhifa.wxgzh.service.BLoginInfoService;
 import com.zhifa.wxgzh.util.BilibiliApiUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -18,6 +20,11 @@ import java.util.List;
 public class BiliScheduled {
     @Autowired
     private BLogService bLogService;
+
+    @Autowired
+    private BLoginInfoService bLoginInfoService;
+
+
     //每日18点01分触发
     @Scheduled(cron="0 1 18 * * ?")
     public void bilibiliTasks() throws Exception {
@@ -27,8 +34,12 @@ public class BiliScheduled {
         strings.add("---开始【登录】---");
 
         String loginPath = "http://api.bilibili.com/x/web-interface/nav";//投币
-        String SESSDATA = "9e31eb4f%2c1625646875%2cbac50%2a11";
-        String csrf = "a84ab9480ea3d1c6711407947db34d9b";//bili_jct
+
+        String userId = "184865921";
+        BLoginInfo bLoginInfo_db=bLoginInfoService.findByUserId(userId);
+
+        String SESSDATA = bLoginInfo_db.getSessdata();
+        String csrf = bLoginInfo_db.getBiliJct();//bili_jct
         String cookie = "SESSDATA=" + SESSDATA + ";";
         String s = BilibiliApiUtil.sendHttpGet(loginPath, cookie);
 

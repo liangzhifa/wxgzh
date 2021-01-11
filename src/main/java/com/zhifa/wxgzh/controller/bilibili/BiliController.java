@@ -7,6 +7,7 @@ import com.zhifa.wxgzh.domain.BLoginInfo;
 import com.zhifa.wxgzh.domain.BLoginUrl;
 import com.zhifa.wxgzh.dto.BiliLoginUrlDto;
 import com.zhifa.wxgzh.dto.BiliLoginUserInfoDto;
+import com.zhifa.wxgzh.scheduled.BiliScheduled;
 import com.zhifa.wxgzh.service.BLogService;
 import com.zhifa.wxgzh.service.BLoginInfoService;
 import com.zhifa.wxgzh.service.BLoginUrlService;
@@ -38,6 +39,9 @@ public class BiliController {
 
     @Autowired
     private BLogService bLogService;
+
+    @Autowired
+    private BiliScheduled biliScheduled;
 
     @GetMapping("/loginCode")
     public void loginCode(HttpServletResponse response) throws Exception {
@@ -93,6 +97,12 @@ public class BiliController {
     @GetMapping("/getBilibiliTasks")
     public List<BLog> bilibiliTasks() throws Exception {
         return bLogService.getList();/**/
-
     }
+
+    @GetMapping("/hand")
+    public List<BLog> onHand() throws Exception {
+        biliScheduled.bilibiliTasks();
+        return bLogService.getList();/**/
+    }
+
 }
