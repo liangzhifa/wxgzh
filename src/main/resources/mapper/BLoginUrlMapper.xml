@@ -20,7 +20,7 @@
         select *
         from B_LOGIN_URL
         where STATUS = #{s}
-          and STATUS_TIMES  <![CDATA[<]]> 3
+          and STATUS_TIMES  <![CDATA[<]]> 5
 
     </select>
     <update id="setSatus">
