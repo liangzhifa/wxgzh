@@ -16,6 +16,7 @@ import com.zhifa.wxgzh.util.HttpUtil;
 import com.zhifa.wxgzh.util.QRCodeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -52,6 +53,8 @@ public class BiliController {
         bLoginUrl.setTs(biliLoginUrlDto.getTs());
         bLoginUrl.setUrl(biliLoginUrlDto.getData().getUrl());
         bLoginUrl.setOauthkey(biliLoginUrlDto.getData().getOauthKey());
+        bLoginUrl.setStatus(BiliConstant.LOGIN_CREATE);
+        bLoginUrl.setStatusTimes(1);
         boolean save = bLoginUrlService.save(bLoginUrl);
 
         BufferedImage image = QRCodeUtil.createImage(biliLoginUrlDto.getData().getUrl(), null, true);
@@ -74,23 +77,8 @@ public class BiliController {
     @GetMapping("/loginInfo")
     public BLoginInfo loginInfo(String oauthKey) throws Exception {
 
-        String s = BilibiliApiUtil.sendHttpPost(BiliConstant.getLoginInfo(oauthKey), null, null);
-        BiliLoginUserInfoDto biliLoginUserInfoDto = JSONObject.parseObject(s, BiliLoginUserInfoDto.class);
-        BLoginInfo bLoginInfo = new BLoginInfo();
-        bLoginInfo.setTs(biliLoginUserInfoDto.getTs());
-        bLoginInfo.setUrl(biliLoginUserInfoDto.getData().getUrl());
-        Map<String, String> paramMap = HttpUtil.urlSplit(biliLoginUserInfoDto.getData().getUrl());
 
-        bLoginInfo.setDedeuserid(paramMap.get("dedeuserid"));
-        bLoginInfo.setDedeuseridCkmd5(paramMap.get("dedeuserid__ckmd5"));
-        bLoginInfo.setExpires(paramMap.get("expires"));
-        bLoginInfo.setSessdata(paramMap.get("sessdata"));
-        bLoginInfo.setBiliJct(paramMap.get("bili_jct"));
-        bLoginInfo.setGourl(paramMap.get("gourl"));
-
-        boolean save = bLoginInfoService.save(bLoginInfo);
-
-        return bLoginInfo;
+        return bLogService.loginByOauthKey(oauthKey);
 
     }
 
@@ -98,10 +86,15 @@ public class BiliController {
     public List<BLog> bilibiliTasks() throws Exception {
         return bLogService.getList();/**/
     }
+    @GetMapping("/getBilibiliTasks/{uId}")
+    public List<BLog> bilibiliTasksWithUid(@PathVariable("uId") String uId) throws Exception {
+        return bLogService.getList(uId);/**/
+    }
+
 
     @GetMapping("/hand")
     public List<BLog> onHand() throws Exception {
-        biliScheduled.bilibiliTasks();
+        biliScheduled.excuteMultiTask();
         return bLogService.getList();/**/
     }
 

@@ -18,4 +18,7 @@
     <!--@mbg.generated-->
     ID, TS, URL, DedeUserID, DedeUserID__ckMd5, Expires, SESSDATA, BILI_JCT, GOURL
   </sql>
+    <delete id="delByDedeuserid">
+      delete from B_LOGIN_INFO where DedeUserID=#{dedeuserid}
+    </delete>
 </mapper>

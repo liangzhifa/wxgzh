@@ -10,6 +10,14 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    ID, `RESULT`, CREATE_TIME
+    ID, `RESULT`, CREATE_TIME, USER_ID
   </sql>
+    <select id="selectListByUid" resultMap="BaseResultMap">
+
+      select * from B_LOG where USER_ID = #{uId,jdbcType=VARCHAR}
+
+    </select>
+
+
+
 </mapper>

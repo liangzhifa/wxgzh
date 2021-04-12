@@ -10,4 +10,8 @@ public class BiliConstant {
     public static final String loginPath = "http://api.bilibili.com/x/web-interface/nav";//登录
 
 
+    public static final String LOGIN_CREATE = "0";//初始化code 状态
+    public static final String LOGIN_COMPLETE = "1";//登录完成状态
+
+
 }

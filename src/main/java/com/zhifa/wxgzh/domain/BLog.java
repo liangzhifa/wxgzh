@@ -24,6 +24,9 @@ public class BLog implements Serializable {
     @TableField(value = "CREATE_TIME")
     private Date createTime;
 
+    @TableField(value = "USER_ID")
+    private String userId;
+
     private static final long serialVersionUID = 1L;
 
     public static final String COL_ID = "ID";

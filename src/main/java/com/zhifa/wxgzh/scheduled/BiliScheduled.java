@@ -1,12 +1,15 @@
 package com.zhifa.wxgzh.scheduled;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.json.JSONUtil;
 import com.zhifa.wxgzh.domain.BLog;
 import com.zhifa.wxgzh.domain.BLoginInfo;
 import com.zhifa.wxgzh.dto.*;
 import com.zhifa.wxgzh.service.BLogService;
 import com.zhifa.wxgzh.service.BLoginInfoService;
+import com.zhifa.wxgzh.service.BLoginUrlService;
 import com.zhifa.wxgzh.util.BilibiliApiUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
+@Slf4j
 public class BiliScheduled {
     @Autowired
     private BLogService bLogService;
@@ -24,26 +28,58 @@ public class BiliScheduled {
     @Autowired
     private BLoginInfoService bLoginInfoService;
 
+    @Autowired
+    private BLoginUrlService bLoginUrlService;
+
+
 
     //每日18点01分触发
     @Scheduled(cron="0 1 18 * * ?")
-    public void bilibiliTasks() throws Exception {
+    public void excuteMultiTask(){
+        /*遍历全部用户信息 */
+        List<BLoginInfo> bLoginInfos = bLoginInfoService.getBaseMapper().selectList(null);
+        bLoginInfos.parallelStream().forEach(bLoginInfo -> {
+            try {
+                bilibiliTasks(bLoginInfo);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+    }
+    //检测扫码登录
+    @Scheduled(cron="0/10 * * * * ?")
+    public void chekQRCodeStatus(){
+        /* */
+        log.info("检测扫码登录: {}", DateUtil.format(new Date(),"yyyy-MM-dd HH:mm:ss"));
+        bLoginUrlService.chekQRCodeStatus();
+
+
+    }
+
+
+
+
+    public void bilibiliTasks(BLoginInfo bLoginInfo) throws Exception {
         List<String> strings = new ArrayList<>();
+        BLog bLog = new BLog();
+
 
         strings.add("运行开始时间:" + new Date());
         strings.add("---开始【登录】---");
 
         String loginPath = "http://api.bilibili.com/x/web-interface/nav";//投币
 
-        String userId = "184865921";
-        BLoginInfo bLoginInfo_db=bLoginInfoService.findByUserId(userId);
+        //String userId = "184865921";
+        //BLoginInfo bLoginInfo_db=bLoginInfoService.findByUserId(userId);
 
-        String SESSDATA = bLoginInfo_db.getSessdata();
-        String csrf = bLoginInfo_db.getBiliJct();//bili_jct
+        String SESSDATA = bLoginInfo.getSessdata();
+        String csrf = bLoginInfo.getBiliJct();//bili_jct
         String cookie = "SESSDATA=" + SESSDATA + ";";
         String s = BilibiliApiUtil.sendHttpGet(loginPath, cookie);
 
         LoginData loginData = BilibiliApiUtil.login(SESSDATA);
+        bLog.setUserId(bLoginInfo.getDedeuserid());
         Level level = loginData.getLevel_info();
         strings.add("登录成功，用户名: "+loginData.getUname());
         strings.add("硬币余额: "+loginData.getMoney());
@@ -97,7 +133,7 @@ public class BiliScheduled {
         strings.add("");
         strings.add("---全部任务已完成---");
         String json = JSONUtil.toJsonStr(strings);
-        BLog bLog = new BLog();
+
         bLog.setResult(json);
         bLog.setCreateTime(new Date());
         bLogService.save(bLog);

@@ -6,4 +6,8 @@ public interface BLoginInfoService extends IService<BLoginInfo>{
 
 
     BLoginInfo findByUserId(String userId);
+
+    void delByDedeuserid(String dedeuserid);
+
+
 }

@@ -20,4 +20,10 @@ public class BLoginInfoServiceImpl extends ServiceImpl<BLoginInfoMapper, BLoginI
         LambdaQueryWrapper<BLoginInfo> queryWrapper = new LambdaQueryWrapper<BLoginInfo>().eq(BLoginInfo::getDedeuserid, userId);
         return bLoginInfoMapper.selectOne(queryWrapper);
     }
+
+    @Override
+    public void delByDedeuserid(String dedeuserid) {
+        bLoginInfoMapper.delByDedeuserid(dedeuserid);
+    }
+
 }

@@ -9,9 +9,23 @@
     <result column="TS" jdbcType="INTEGER" property="ts" />
     <result column="URL" jdbcType="VARCHAR" property="url" />
     <result column="OAUTHKEY" jdbcType="VARCHAR" property="oauthkey" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    ID, CODE, TS, URL, OAUTHKEY
+    ID, CODE, TS, URL, OAUTHKEY, STATUS
   </sql>
+    <select id="chekQRCodeStatus" resultMap="BaseResultMap">
+
+      select * from B_LOGIN_URL where STATUS=#{s} and  STATUS_TIMES  <![CDATA[<]]>  3
+
+    </select>
+  <update id="setSatus">
+    update B_LOGIN_URL set STATUS=#{status,jdbcType=VARCHAR} where OAUTHKEY=#{oauthkey,jdbcType=VARCHAR}
+  </update>
+  <update id="incStatusTimes">
+
+    update B_LOGIN_URL set STATUS_TIMES=(STATUS_TIMES+1) where OAUTHKEY=#{oauthkey,jdbcType=VARCHAR}
+
+  </update>
 </mapper>

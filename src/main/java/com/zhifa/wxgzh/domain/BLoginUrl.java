@@ -28,6 +28,11 @@ public class BLoginUrl implements Serializable {
 
     @TableField(value = "OAUTHKEY")
     private String oauthkey;
+    @TableField(value = "STATUS")
+    private String status;
+
+    @TableField(value = "STATUS_TIMES")
+    private Integer statusTimes;
 
     private static final long serialVersionUID = 1L;
 
