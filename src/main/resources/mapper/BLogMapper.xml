@@ -14,7 +14,7 @@
     </sql>
     <select id="selectListByUid" resultMap="BaseResultMap">
 
-      select * from B_LOG where USER_ID = #{uId,jdbcType=VARCHAR}
+      select * from B_LOG where USER_ID = #{uId,jdbcType=VARCHAR} order by CREATE_TIME desc
 
     </select>
 

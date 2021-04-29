@@ -39,7 +39,7 @@ public class BLogServiceImpl extends ServiceImpl<BLogMapper, BLog> implements BL
 
     @Override
     public List<BLog> getList() {
-        return bLogMapper.selectList(null);
+        return bLogMapper.selectList(new LambdaQueryWrapper<BLog>().orderByDesc(BLog::getCreateTime));
     }
 
     @Transactional
