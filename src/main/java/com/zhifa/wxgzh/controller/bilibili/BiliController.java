@@ -15,10 +15,7 @@ import com.zhifa.wxgzh.util.BilibiliApiUtil;
 import com.zhifa.wxgzh.util.HttpUtil;
 import com.zhifa.wxgzh.util.QRCodeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -75,8 +72,7 @@ public class BiliController {
 
 
     @GetMapping("/loginInfo")
-    public BLoginInfo loginInfo(String oauthKey) throws Exception {
-
+    public BLoginInfo loginInfo(@RequestParam String oauthKey) throws Exception {
 
         return bLogService.loginByOauthKey(oauthKey);
 
@@ -86,6 +82,8 @@ public class BiliController {
     public List<BLog> bilibiliTasks() throws Exception {
         return bLogService.getList();/**/
     }
+
+
     @GetMapping("/getBilibiliTasks/{uId}")
     public List<BLog> bilibiliTasksWithUid(@PathVariable("uId") String uId) throws Exception {
         return bLogService.getList(uId);/**/

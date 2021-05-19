@@ -2,6 +2,7 @@ package com.zhifa.wxgzh.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.github.pagehelper.PageHelper;
 import com.zhifa.wxgzh.constant.BiliConstant;
 import com.zhifa.wxgzh.domain.BLoginInfo;
 import com.zhifa.wxgzh.dto.BiliLoginUserInfoDto;
@@ -39,6 +40,7 @@ public class BLogServiceImpl extends ServiceImpl<BLogMapper, BLog> implements BL
 
     @Override
     public List<BLog> getList() {
+        PageHelper.startPage(1, 20);
         return bLogMapper.selectList(new LambdaQueryWrapper<BLog>().orderByDesc(BLog::getCreateTime));
     }
 
@@ -77,6 +79,7 @@ public class BLogServiceImpl extends ServiceImpl<BLogMapper, BLog> implements BL
 
     @Override
     public List<BLog> getList(String uId) {
+        PageHelper.startPage(1, 20);
         return bLogMapper.selectListByUid(uId);
     }
 

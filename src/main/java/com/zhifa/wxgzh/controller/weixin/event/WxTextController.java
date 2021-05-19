@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 public class WxTextController {
 
 
+
     @WxMessageMapping(type = WxMessage.Type.TEXT, wildcard = "**")
     @WxAsyncMessage
     public WxUserMessage text(WxRequest wxRequest, String content) {

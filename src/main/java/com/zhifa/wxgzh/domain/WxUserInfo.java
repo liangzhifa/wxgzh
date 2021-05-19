@@ -13,12 +13,15 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+@Slf4j
 @TableName(value = "WX_USER_INFO")
 public class WxUserInfo implements Serializable {
+
+
     /**
      * 主键
      */
@@ -93,4 +96,8 @@ public class WxUserInfo implements Serializable {
     public static final String COL_CREATE_TIME = "CREATE_TIME";
 
     public static final String COL_REMARK = "REMARK";
+
+    public WxUserInfo() {
+        log.info("============构造方法=============");
+    }
 }
